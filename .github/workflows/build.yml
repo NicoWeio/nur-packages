@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    name: Build rainlendar2
+    name: Evaluate and build packages
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -21,5 +21,21 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Build package
-        run: nix-build --no-out-link -A rainlendar2 --arg pkgs 'import <nixpkgs> { config.allowUnfree = true; }'
+      - name: Evaluate package set
+        run: |
+          nix-env -f . -qaP \
+            --arg pkgs 'import <nixpkgs> { config.allowUnfree = true; }' \
+            --json | jq -r 'keys[]'
+
+      - name: Build all packages
+        run: |
+          nix-env -f . -qaP \
+            --arg pkgs 'import <nixpkgs> { config.allowUnfree = true; }' \
+            --json \
+          | jq -r 'keys[]' \
+          | while IFS= read -r attribute; do
+              echo "Building $attribute"
+              nix-build --no-out-link \
+                -A "$attribute" \
+                --arg pkgs 'import <nixpkgs> { config.allowUnfree = true; }'
+            done
