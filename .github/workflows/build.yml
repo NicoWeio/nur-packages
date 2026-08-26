@@ -3,6 +3,9 @@ name: Build packages
 on:
   push:
   pull_request:
+  schedule:
+    # Weekly check whether upstream broke our packages
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
