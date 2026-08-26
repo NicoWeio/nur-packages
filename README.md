@@ -7,6 +7,7 @@ packages.
 
 | Package | Description |
 | --- | --- |
+| `nuradiomc` | Monte Carlo framework for radio detection of neutrinos. |
 | `radiopropa` | Radio propagation in inhomogeneous media ray tracing. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
 
