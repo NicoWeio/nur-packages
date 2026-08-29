@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   build:
@@ -29,6 +30,9 @@ jobs:
         uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:${{ matrix.channel }}
+
+      - name: Cache Nix store paths
+        uses: DeterminateSystems/magic-nix-cache-action@v14
 
       - name: Evaluate package set
         run: |
