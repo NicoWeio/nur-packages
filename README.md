@@ -7,7 +7,12 @@ packages.
 
 | Package | Description |
 | --- | --- |
+| `madgraph` | Framework for automated particle-physics process computation. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
+
+`madgraph` keeps its writable MadGraph installation under
+`$XDG_CACHE_HOME/madgraph/3.7.0` (or `~/.cache/madgraph/3.7.0`) after its first
+launch, as generated processes and configuration are mutable.
 
 ## Installation
 
