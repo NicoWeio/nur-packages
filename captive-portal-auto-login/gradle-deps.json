@@ -1,0 +1,4 @@
+{
+  "!comment": "Generate this file with `nix build --no-link --print-out-paths .#captivePortalAutoLogin.updateDeps`, then execute the resulting path.",
+  "!version": 1
+}

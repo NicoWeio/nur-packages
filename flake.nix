@@ -14,8 +14,11 @@
             inherit system;
             config.allowUnfree = true;
           };
+          captivePortalAutoLogin = pkgs.callPackage ./captive-portal-auto-login { };
         in
         {
+          inherit captivePortalAutoLogin;
+          updateCaptivePortalAutoLoginDeps = captivePortalAutoLogin.updateDeps;
           rainlendar2 = pkgs.callPackage ./rainlendar2 { };
         });
     };

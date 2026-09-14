@@ -7,6 +7,7 @@ packages.
 
 | Package | Description |
 | --- | --- |
+| `captivePortalAutoLogin` | Linux CLI that detects and solves supported captive portals. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
 
 ## Installation
@@ -32,6 +33,25 @@ To run Rainlendar directly without installing it:
 ```sh
 nix run github:NicoWeio/nur-packages#rainlendar2
 ```
+
+Run a one-shot captive-portal check without installing it:
+
+```sh
+nix run github:NicoWeio/nur-packages#captivePortalAutoLogin -- --oneshot
+```
+
+### Captive Portal Auto Login dependencies
+
+The package builds the upstream JVM Linux CLI. Its Gradle dependency lockfile
+must be generated when the upstream dependencies change:
+
+```sh
+updater=$(nix build --no-link --print-out-paths .#updateCaptivePortalAutoLoginDeps)
+"$updater"
+```
+
+Commit the updated `captive-portal-auto-login/gradle-deps.json` before running
+`nix build .#captivePortalAutoLogin`.
 
 ## Development
 
