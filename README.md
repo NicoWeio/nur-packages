@@ -8,6 +8,7 @@ packages.
 | Package | Description |
 | --- | --- |
 | `radiopropa` | Radio propagation in inhomogeneous media ray tracing. |
+| `pysr` | High-performance symbolic regression in Python and Julia. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
 
 ## Installation
