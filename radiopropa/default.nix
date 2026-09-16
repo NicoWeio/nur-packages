@@ -28,12 +28,19 @@ stdenv.mkDerivation (finalAttrs: {
   propagatedBuildInputs = [ numpy ];
 
   cmakeFlags = [
+    "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
     "-DENABLE_GIT=OFF"
     "-DENABLE_TESTING=OFF"
     "-DPYTHON_EXECUTABLE=${python.interpreter}"
     "-DPYTHON_INCLUDE_DIR=${python}/include/python${python.pythonVersion}"
     "-DPYTHON_LIBRARY=${python}/lib/libpython${python.pythonVersion}.so"
   ];
+
+  postPatch = ''
+    substituteInPlace python/Python.cmake \
+      --replace-fail "import sys; from distutils import sysconfig; sys.stdout.write(sysconfig.get_python_inc())" "import sys, sysconfig; sys.stdout.write(sysconfig.get_path('include'))"
+    sed -i "/get_python_lib/c\  COMMAND python -c \"import sys; sys.stdout.write('$out/${python.sitePackages}')\"" python/Python.cmake
+  '';
 
   doCheck = false;
 
