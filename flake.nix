@@ -14,11 +14,6 @@
             inherit system;
             config.allowUnfree = true;
           };
-          pythonPackages = pkgs.python312Packages;
-          juliapkg = pythonPackages.callPackage ./pysr/juliapkg { };
-          juliacall = pythonPackages.callPackage ./pysr/juliacall {
-            inherit juliapkg;
-          };
         in
         {
           crpropa = pkgs.callPackage ./crpropa {
@@ -29,9 +24,7 @@
             python = pkgs.python312;
             numpy = pkgs.python312Packages.numpy;
           };
-          pysr = pythonPackages.callPackage ./pysr {
-            inherit juliacall;
-          };
+          pysr = pkgs.python312Packages.callPackage ./pysr { };
           rainlendar2 = pkgs.callPackage ./rainlendar2 { };
         });
     };

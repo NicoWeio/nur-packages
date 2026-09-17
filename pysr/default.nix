@@ -1,9 +1,9 @@
 { lib
 , buildPythonPackage
+, callPackage
 , fetchPypi
 , hatchling
 , click
-, juliacall
 , julia
 , numpy
 , pandas
@@ -12,6 +12,12 @@
 , typing-extensions
 }:
 
+let
+  juliapkg = callPackage ./juliapkg { };
+  juliacall = callPackage ./juliacall {
+    inherit juliapkg;
+  };
+in
 buildPythonPackage rec {
   pname = "pysr";
   version = "2.4.0";
