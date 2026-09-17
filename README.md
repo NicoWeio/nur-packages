@@ -9,6 +9,9 @@ packages.
 | --- | --- |
 | `radiopropa` | Radio propagation in inhomogeneous media ray tracing. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
+| `cubic-interpolation` | C++ library for cubic and bicubic interpolation. |
+| `proposal` | Monte Carlo propagation of charged leptons and photons. |
+| `corsika8` | Framework for particle-cascade simulation in astroparticle physics. |
 
 ## Installation
 
