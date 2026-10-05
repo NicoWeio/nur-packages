@@ -7,10 +7,12 @@ packages.
 
 | Package | Description |
 | --- | --- |
+| `crpropa` | Framework for simulations of cosmic ray propagation. |
+| `jammy-flows` | Python library for normalizing flow PDFs on manifolds. |
 | `proposal` | C++ and Python library for propagating leptons and gamma rays through matter. |
+| `prometheus` | Python package for simulating neutrino telescopes. |
 | `radiopropa` | Radio propagation in inhomogeneous media ray tracing. |
 | `rainlendar2` | Customizable desktop calendar (Rainlendar Lite). |
-| `jammy-flows` | Python library for normalizing flow PDFs on manifolds. |
 
 ## Installation
 
@@ -20,6 +22,14 @@ namespace:
 ```nix
 environment.systemPackages = [
 	pkgs.nur.repos.NicoWeio.rainlendar2
+];
+```
+
+Prometheus is a Python library. Add it to a Python environment:
+
+```nix
+environment.systemPackages = [
+  (pkgs.python312.withPackages (_: [ pkgs.nur.repos.NicoWeio.prometheus ]))
 ];
 ```
 
