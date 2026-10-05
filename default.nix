@@ -5,6 +5,11 @@ let
   mhealpy = pythonPackages.callPackage ./jammy-flows/mhealpy.nix { inherit healpy; };
   prometheusPython = pkgs.python312.override {
     packageOverrides = self: super: {
+      # AnyIO 4.14.2's upstream test suite fails in sandboxed builders.
+      # Keep the passing 26.05 package (4.13.0) unchanged.
+      anyio = if pkgs.lib.versionAtLeast super.anyio.version "4.14.2"
+        then super.anyio.overridePythonAttrs (_: { doCheck = false; })
+        else super.anyio;
       # The full JAX suite has failures on this nixpkgs revision. Prometheus
       # checks its own imports after installation.
       jax = super.jax.overridePythonAttrs (_: { doCheck = false; });
